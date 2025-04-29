@@ -18,17 +18,8 @@ if [ ! -d "$KERNEL_DIR" ]; then
     cd "$KERNEL_DIR"
     make defconfig
 
-    # Embed full debug info
-    scripts/config --enable DEBUG_INFO
-    scripts/config --enable DEBUG_INFO_REDUCED
-    scripts/config --disable DEBUG_INFO_SPLIT
-    scripts/config --disable STRIP_ASM_SYMS
-    scripts/config --enable FRAME_POINTERS
-    scripts/config --enable KALLSYMS
-    scripts/config --enable GDB_SCRIPTS
-    scripts/config --enable DEBUG_KERNEL
-    scripts/config --enable MAGIC_SYSRQ
-
+    # Embed debug info
+    ./scripts/config --enable DEBUG_INFO_DWARF5
     make olddefconfig
     
 else
